@@ -1,0 +1,8 @@
+import Data from "../Data";
+
+const Sales = () => {
+  const bills = JSON.parse(localStorage.getItem("bills") || "[]");
+  const total = bills.reduce((sum, bill) => sum + bill.products.reduce((productSum, product) => productSum + Number(product.total), 0), 0);
+  return <main className="sales-parent"><header className="sales-header"><div><p className="section-kicker">Transaction history</p><h1 className="section-title">Sales</h1><p>Every completed order in one place.</p></div><div className="metric-card"><div className="metric-label">Total earnings</div><div className="metric-value">{total.toFixed(2)}$</div></div></header>{bills.length ? <div className="table-parent"><table className="sales-table"><thead><tr><th>Products</th><th>Unit price</th><th>Quantity</th><th>Order total</th><th>Date</th></tr></thead><tbody>{[...bills].reverse().map((bill, index) => <tr key={`${bill.date}-${index}`}><td>{bill.products.map((line, lineIndex) => { const product = Data.find((item) => item.id === line.product_id); return <p className="bill-name" key={`${line.product_id}-${lineIndex}`}>{product?.name}</p>; })}</td><td>{bill.products.map((line, lineIndex) => <p className="bill-price" key={lineIndex}>{line.price}$</p>)}</td><td>{bill.products.map((line, lineIndex) => <p className="bill-quantity" key={lineIndex}>{line.quantity}</p>)}</td><td><strong>{bill.products.reduce((sum, line) => sum + Number(line.total), 0).toFixed(2)}$</strong></td><td>{new Date(bill.date).toLocaleString()}</td></tr>)}</tbody></table></div> : <div className="empty-state">There are no completed bills yet.</div>}</main>;
+};
+export default Sales;
