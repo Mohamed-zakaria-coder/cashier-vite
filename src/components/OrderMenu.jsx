@@ -1,11 +1,11 @@
 
 import Data from "../Data";
 const OrderMenu = (props) => {
-  const products = props.billProducts.reverse().map((bill) => {
+  const products = [...props.billProducts].reverse().map((bill, index) => {
     const product = Data.filter((product) => product.id === bill.product_id)[0];
 
     return (
-      <div className="each-order" key={Math.random()}>
+      <div className="each-order" key={index}>
         <div>
           <img src={product.Image} className="menu-img" alt={product.name} />
         </div>
