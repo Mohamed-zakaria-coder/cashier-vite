@@ -12,5 +12,5 @@ export default defineConfig({
     }),
     tailwindcss(),
   ],
-  base: process.env.NODE_ENV === 'production' ? '/store-pulse/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/cashier-vite/' : '/',
 });
