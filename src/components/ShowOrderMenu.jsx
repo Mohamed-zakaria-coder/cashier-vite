@@ -1,6 +1,6 @@
 import Data from "../Data";
 
-const ShowOrderMenu = ({ billProducts, charge, saveInLocal }) => {
+const ShowOrderMenu = ({ billProducts, charge, saveInLocal, closeOrderMenu }) => {
   const products = [...billProducts].reverse();
   const total = billProducts.reduce((sum, product) => sum + Number(product.total), 0);
 
@@ -26,7 +26,7 @@ const ShowOrderMenu = ({ billProducts, charge, saveInLocal }) => {
         })}
       </div>
       <div className="total-price-container"><div>Subtotal</div><div>{total.toFixed(2)}$</div></div>
-      <button className="charge-btn" disabled={!billProducts.length} onClick={() => { if (billProducts.length) { saveInLocal(); charge(); } }}>
+      <button className="charge-btn" disabled={!billProducts.length} onClick={() => { if (billProducts.length) { saveInLocal(); charge(); closeOrderMenu(); } }}>
         Charge {total.toFixed(2)}$
       </button>
     </section>

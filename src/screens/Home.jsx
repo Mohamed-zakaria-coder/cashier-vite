@@ -49,7 +49,7 @@ const Home = () => {
       <div className="choose-sort-parent"><h2 className="choose-order">{search ? `Results for “${search}”` : "Choose an item"}</h2><span className="muted">{products.length} items</span></div>
       <div className="pizza-container">{products.length ? products.map((item) => <Pizza key={item.id} {...{ id: item.id, name: item.name, img: item.Image, size: item.size, click: handleOpenBill }} />) : <div className="empty-menu">No menu items match your search.</div>}</div>
       <button type="button" className="out-line-parent" onClick={() => setShowOrderMenu((prev) => !prev)} aria-label="Toggle current order"><TiShoppingCart className="out-line-menu" /><span className="order-toggle-count">{billProducts.length}</span></button>
-      <div className={`show-ordermenu-parent ${showOrderMenu ? "open" : ""}`}><ShowOrderMenu billProducts={billProducts} setBillProducts={setBillProducts} charge={() => setBillProducts([])} saveInLocal={saveInLocal} /></div>
+      <div className={`show-ordermenu-parent ${showOrderMenu ? "open" : ""}`}><ShowOrderMenu billProducts={billProducts} setBillProducts={setBillProducts} charge={() => setBillProducts([])} saveInLocal={saveInLocal} closeOrderMenu={() => setShowOrderMenu(false)} /></div>
       {showBill && selectedPizza && <Modal selectedPizza={selectedPizza} selectedPrice={selectedPrice} selectedQuantity={selectedQuantity} handleChangePrice={(event) => setSelectedPrice(Number(event.target.value))} handleChange={(event) => setSelectedQuantity(Number(event.target.value))} handleClose={() => setShowBill(false)} setBillProducts={setBillProducts} setShowBill={setShowBill} />}
     </main>
   );
